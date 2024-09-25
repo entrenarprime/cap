@@ -1,0 +1,3 @@
+ID,Nombre,Fecha,Telefono,email,Curso_ID,createdAt,createdBy,modifiedAt,modifiedBy,critico,status
+20567922-7d57-4e76-b16c-e53fd97dcb12,Marcelo,1973-03-29,+56 55555555,marcelo@gmail.com,20567922-7d57-4e76-b16c-e53fd97dcb26,,,,,1,A
+20567922-7d57-4e76-b16c-e53fd97dcb13,Jose,1973-03-19,+56 666666666,Jose@gmail.com,20567922-7d57-4e76-b16c-e53fd97dcb26,,,,,2,P
