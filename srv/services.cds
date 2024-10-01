@@ -23,7 +23,10 @@ service AdminService {
     annotate Cursos with @odata.draft.enabled;
     annotate Cursos with @odata.draft.bypass;
 }
- 
+
+//anotacion de seguridad
+annotate AdminService with @(requires: 'admin') ;
+
 
 service EstudiantesSrv {
     @readonly
@@ -38,6 +41,9 @@ service EstudiantesSrv {
 
         }
 }
+
+//anotacion de seguridad
+annotate EstudiantesSrv with @(requires: 'viewer') ;
 
 //Titulo Popup - Multiples Lineas
 annotate AdminService.inText:comment with @Common.Label : 'Comentarios';

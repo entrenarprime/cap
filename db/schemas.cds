@@ -1,7 +1,7 @@
 namespace entrenamiento;
 
 using {managed} from '@sap/cds/common';
-using { Attachments } from '@cap-js/attachments';
+//using { Attachments } from '@cap-js/attachments';
 
 
 entity Alumnos : managed {
@@ -18,7 +18,7 @@ entity Alumnos : managed {
        critico  : Integer;
        comentario: String;
        Curso    : Association to Cursos;
-       attachments: Composition of many Attachments;
+//       attachments: Composition of many Attachments;
      
 }
 

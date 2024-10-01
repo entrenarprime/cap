@@ -9,7 +9,6 @@ modules:
   requires:
   - name: Alumnos-auth
   - name: Alumnos-db
-  - name: Alumnos-destination
   provides:
   - name: srv-api
     properties:
@@ -27,6 +26,36 @@ modules:
   - name: Alumnos-db
   parameters:
     buildpack: nodejs_buildpack
+- name: Alumnos-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: Alumnos-destination-content
+    parameters:
+      content-target: true
+  - name: Alumnos-html5-repo-host
+    parameters:
+      service-key:
+        name: alumnos-html5-repo-host-key
+  - name: Alumnos-auth
+    parameters:
+      service-key:
+        name: alumnos-auth-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: alumnos_html5_repo_host
+          ServiceInstanceName: Alumnos-html5-repo-host
+          ServiceKeyName: alumnos-html5-repo-host-key
+          sap.cloud.service: alumnos
+        - Authentication: OAuth2UserTokenExchange
+          Name: Alumnos-auth
+          ServiceInstanceName: Alumnos-auth
+          ServiceKeyName: alumnos-auth-key
+          sap.cloud.service: alumnos
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
 - name: Alumnos
   type: approuter.nodejs
   path: app/router
@@ -39,6 +68,7 @@ modules:
       url: ~{srv-url}
   - name: Alumnos-destination
   - name: Alumnos-html5-runtime
+  - name: Alumnos-auth
   parameters:
     disk-quota: 256M
     keep-existing-routes: true
@@ -108,6 +138,8 @@ resources:
 - name: Alumnos-db
   type: com.sap.xs.hdi-container
   parameters:
+    config:
+      database_id: 0df2402f-96a4-40b9-a56b-0ab825559c85
     service: hana
     service-plan: hdi-shared
 - name: Alumnos-destination
@@ -132,7 +164,10 @@ resources:
             URL: https://ui5.sap.com
           existing_destinations_policy: update
     service: destination
+    service-name: Alumnos-destination
     service-plan: lite
+  requires:
+  - name: srv-api
 - name: Alumnos-html5-repo-host
   type: org.cloudfoundry.managed-service
   parameters:

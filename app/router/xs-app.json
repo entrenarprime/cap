@@ -15,8 +15,9 @@
       "source": "^/(.*)$",
       "target": "$1",
       "destination": "srv-api",
+      "authentication": "xsuaa",
       "csrfProtection": true
     }
   ],
-  "welcomeFile": "/alumnos"
+  "welcomeFile": "app/launchpad.html"
 }
